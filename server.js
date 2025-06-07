@@ -7,11 +7,12 @@ app.use(cors()); // permite peticiones desde el frontend
 app.use(express.json());
 
 const pool = new Pool({
-  user: "postgres",         // <- reemplaza con tu usuario
-  host: 'localhost',
-  database: 'Tienda',
-  password: 'password',  // <- reemplaza con tu contraseña
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  ssl: { rejectUnauthorized: false }  // importante para conexión segura
 });
 
 app.get('/productos', async (req, res) => {
